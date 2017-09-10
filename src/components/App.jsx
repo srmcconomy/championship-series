@@ -78,6 +78,7 @@ class App extends Component {
           </div>
           <div className={styles.desc}>
             Complete 18 goals!<br /><br />
+            Getting the Master Sword before 1 hour has passed is banned<br /> <br />
             Right click for red, left click for green<br />
             The amount of green goals you have will appear on the leaderboard on stream
           </div>
