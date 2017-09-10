@@ -6,7 +6,8 @@ const plumber = require('gulp-plumber');
 const babel = require('gulp-babel');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('./webpack.config');
+const webpackConfigClientProd = require('./webpack.config.client.prod');
+const webpackConfigClientDev = require('./webpack.config.client.dev');
 const webpackConfigServer = require('./webpack.config.server');
 const babelConfigNode = require('./babel.config').node;
 const fs = require('fs');
@@ -55,7 +56,7 @@ gulp.task('build:server', cb => {
 });
 
 gulp.task('build:client', cb => {
-  webpack(webpackConfig, (err, stats) => {
+  webpack(webpackConfigClientProd, (err, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {

@@ -8,13 +8,24 @@ module.exports = {
     ],
     plugins: ['dynamic-import-node', 'transform-class-properties'],
   },
-  chrome: {
+  clientDev: {
     presets: [
       ['env', {
-        targets: { browsers: 'last 2 Chrome versions' },
+        targets: { browsers: '> 5%' },
         modules: false,
       }],
       'react'
+    ],
+    plugins: ['syntax-dynamic-import', 'transform-class-properties'],
+  },
+  clientProd: {
+    presets: [
+      ['env', {
+        targets: { browsers: '> 5%' },
+        modules: false,
+      }],
+      'react',
+      'minify',
     ],
     plugins: ['syntax-dynamic-import', 'transform-class-properties'],
   },

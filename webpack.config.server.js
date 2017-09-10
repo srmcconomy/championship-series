@@ -2,6 +2,7 @@ const path = require('path');
 const babelConfigNode = require('./babel.config').node;
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -26,14 +27,7 @@ module.exports = {
   ],
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
-      }, {
+     {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
