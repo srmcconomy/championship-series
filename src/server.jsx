@@ -12,17 +12,22 @@ import reducers from './reducers';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
 
+import syncMiddleware from './util/syncMiddleware';
+
 const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieSession({ secret:'verysecretetc1234' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const store = createStore(reducers, applyMiddleware(socketMiddleware(io)));
+const playersOnStream = [];
+
+const store = createStore(reducers, applyMiddleware(socketMiddleware(io), syncMiddleware(playersOnStream)));
 
 passport.use(new Strategy(
   {
@@ -84,11 +89,25 @@ app.get('/leaderboard', (req, res) => {
   </head>
   <body>
     <div id="react-root"></div>
-    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
+    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};</script>
     <script src="${sourcePath}/leaderboard.js"></script>
   </body>
 </html>`
   );
+});
+
+app.post('/stream', (req, res) => {
+  try {
+    console.log('post stream');
+    console.log(req.body);
+    playersOnStream.length = 0;
+    playersOnStream.push(...req.body.map(player => player.toLowerCase()));
+    console.log(store.getState().toJS());
+    res.send(JSON.stringify(store.getState().filter((value, key) => playersOnStream.includes(key.toLowerCase())).toJS()))
+  } catch (err) {
+    console.log(err);
+    res.send();
+  }
 });
 
 app.use((req, res) => {
