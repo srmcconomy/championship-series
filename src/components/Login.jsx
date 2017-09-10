@@ -5,7 +5,22 @@ import styles from './login.scss';
 export default class Login extends Component {
   render() {
     return (
-      <a className={styles['login-button']} href='/auth/twitch'>Login with Twitch</a>
+      <div className={styles.login}>
+        <div className={styles.title}>
+          <div className={styles.sub}>
+            ocarina of time
+          </div>
+          <div className={styles.main}>
+            Championship Series
+          </div>
+        </div>
+        <div className={styles.desc}>
+          Season 2<br/>Race 3
+        </div>
+        <a className={styles['login-button']} href='/auth/twitch'>
+          <span>Login with Twitch</span>
+        </a>
+      </div>
     )
   }
 }

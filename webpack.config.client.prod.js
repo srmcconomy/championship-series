@@ -46,7 +46,12 @@ module.exports = merge(common, {
           loader: 'babel-loader',
           options: babelConfigClientProd,
         },
-      },
+      }, {
+        test: /(\.svg$|\.otf$)/,
+        use: {
+          loader: 'file-loader',
+        }
+      }
     ],
   },
 });

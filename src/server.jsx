@@ -65,7 +65,8 @@ app.get('/login', (req, res) => {
 `<html>
   <head>
     <link href="${sourcePath}/login.css" rel="stylesheet">
-  </head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    </head>
   <body>
     <div id="react-root"></div>
     <script src="${sourcePath}/login.js"></script>
@@ -84,7 +85,7 @@ app.get('/leaderboard', (req, res) => {
   <body>
     <div id="react-root"></div>
     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
-    <script src="http://localhost:9000${sourcePath}/leaderboard.js"></script>
+    <script src="${sourcePath}/leaderboard.js"></script>
   </body>
 </html>`
   );

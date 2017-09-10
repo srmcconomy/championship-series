@@ -28,7 +28,7 @@ module.exports = merge(common, {
     publicPath: `http://localhost:${config.webpack.devServerPort}/${config.webpack.publicPath}`,
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'assets'),
     publicPath: `http://localhost:${config.webpack.devServerPort}/${config.webpack.publicPath}`,
     port: config.webpack.devServerPort,
     hot: true,
@@ -59,7 +59,12 @@ module.exports = merge(common, {
           loader: 'babel-loader',
           options: babelConfigClientDev,
         },
-      },
+      }, {
+        test: /(\.svg$|\.otf$)/,
+        use: {
+          loader: 'file-loader',
+        }
+      }
     ],
   },
 });
