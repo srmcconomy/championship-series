@@ -12,8 +12,6 @@ import reducers from './reducers';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
 
-import syncMiddleware from './util/syncMiddleware';
-
 const app = express();
 const server = http.Server(app);
 const io = socketio(server);
@@ -27,7 +25,7 @@ app.use(passport.session());
 
 const playersOnStream = [];
 
-const store = createStore(reducers, applyMiddleware(socketMiddleware(io), syncMiddleware(playersOnStream)));
+const store = createStore(reducers, applyMiddleware(socketMiddleware(io)));
 
 passport.use(new Strategy(
   {
