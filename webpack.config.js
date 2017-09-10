@@ -10,6 +10,14 @@ module.exports = {
       'react-hot-loader/patch',
       './src/client.jsx',
     ],
+    login: [
+      'react-hot-loader/patch',
+      './src/login.jsx',
+    ],
+    leaderboard: [
+      'react-hot-loader/patch',
+      './src/leaderboard.jsx',
+    ],
   },
   devtool: 'source-map',
   output: {
@@ -39,9 +47,9 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { modules: true, sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       }, {
         test: /\.jsx?$/,

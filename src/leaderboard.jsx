@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import { Map, List } from 'immutable';
-import socketMiddleware from './util/clientSocketMiddleware'
+import { BrowserRouter } from 'react-router-dom';
 import io from 'socket.io-client';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-
-import App from './components/App';
+import socketMiddleware from './util/clientSocketMiddleware';
 import reducers from './reducers';
+import { Map, List } from 'immutable';
+
+import Leaderboard from './components/Leaderboard';
 
 const socket = io();
 
@@ -21,7 +22,7 @@ const render = () => {
   const registry = {}
   const app = (
     <Provider store={store}>
-      <App twitch={window.USER} />
+      <Leaderboard />
     </Provider>
   );
   ReactDOM.render(app, document.getElementById('react-root'));
@@ -30,5 +31,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => { render() });
+  module.hot.accept('./components/Login', () => { render() });
 }

@@ -1,0 +1,62 @@
+body {
+  background: #212121;
+  font-family: Roboto;
+  color: white;
+  margin: 0;
+}
+
+.leaderboard {
+  display: flex;
+  margin: 20px;
+}
+
+.places {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  .place {
+    margin: 4px 0;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    color: rgb(128, 128, 128);
+    &:first-child {
+      color: rgb(247, 226, 121);
+    }
+    &:nth-child(2) {
+      color: rgb(190, 199, 210);
+    }
+    &:nth-child(3) {
+      color: rgb(224, 148, 86);
+    }
+  }
+}
+
+.players {
+  position: relative;
+}
+
+.entry {
+  transition: transform 0.3s ease-in-out;
+  position: absolute;
+  height: 32px;
+  border-radius: 16px;
+  background: #303030;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  display: flex;
+  align-items: center;
+  width: 250px;
+  padding: 0 0 0 16px;
+  margin: 4px 0;
+  .name {
+    flex: 1;
+  }
+  .score {
+    background: #424242;
+    border-radius: 16px;
+    height: 32px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+}
