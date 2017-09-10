@@ -1,0 +1,7 @@
+.login-button {
+  background: #6441A4;
+  &:after {
+    content: '';
+    background-image: url(/assets/twitch.svg);
+  }
+}
