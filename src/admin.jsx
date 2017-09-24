@@ -8,7 +8,7 @@ import socketMiddleware from './util/clientSocketMiddleware';
 import reducers, { RupeeRecord } from './reducers/rupeeGoal';
 import { Map, List } from 'immutable';
 
-import Leaderboard from './components/Leaderboard';
+import Admin from './components/Admin';
 
 const socket = io();
 
@@ -22,7 +22,7 @@ const render = () => {
   const registry = {}
   const app = (
     <Provider store={store}>
-      <Leaderboard />
+      <Admin />
     </Provider>
   );
   ReactDOM.render(app, document.getElementById('react-root'));
@@ -31,5 +31,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept('./components/Login', () => { render() });
+  module.hot.accept('./components/Admin', () => { render() });
 }

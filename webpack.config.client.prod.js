@@ -8,14 +8,20 @@ const common = require('./webpack.config.client.common');
 
 module.exports = merge(common, {
   entry: {
-    app: [
-      './src/client.jsx',
-    ],
+    // app: [
+    //   './src/client.jsx',
+    // ],
     login: [
       './src/login.jsx',
     ],
     leaderboard: [
       './src/leaderboard.jsx',
+    ],
+    rupeeGoal: [
+      './src/rupeeClient.jsx',
+    ],
+    rupeeGoal: [
+      './src/admin.jsx',
     ],
   },
   output: {

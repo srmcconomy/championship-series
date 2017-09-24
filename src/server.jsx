@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
+import reducers from './reducers/rupeeGoal';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
 
@@ -94,6 +94,22 @@ app.get('/leaderboard', (req, res) => {
   );
 });
 
+app.get('/ewqfdsvsfdsg', (req, res) => {
+  res.send(
+`<html>
+  <head>
+    <link href="${sourcePath}/admin.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  </head>
+  <body>
+    <div id="react-root"></div>
+    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};</script>
+    <script src="${sourcePath}/admin.js"></script>
+  </body>
+</html>`
+  );
+});
+
 app.post('/stream', (req, res) => {
   try {
     console.log('post stream');
@@ -108,21 +124,39 @@ app.post('/stream', (req, res) => {
   }
 });
 
-app.use((req, res) => {
+app.get('/rupee-goal', (req, res) => {
   if (!req.user) res.redirect('/login');
   res.send(
 `<html>
   <head>
-    <link href="${sourcePath}/app.css" rel="stylesheet">
+    <link href="${sourcePath}/rupeeGoal.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
   </head>
   <body>
     <div id="react-root"></div>
     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
-    <script src="${sourcePath}/app.js"></script>
+    <script src="${sourcePath}/rupeeGoal.js"></script>
   </body>
 </html>`
   );
+});
+
+app.use((req, res) => {
+  if (!req.user) res.redirect('/login');
+  res.send('404');
+//   res.send(
+// `<html>
+//   <head>
+//     <link href="${sourcePath}/app.css" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+//   </head>
+//   <body>
+//     <div id="react-root"></div>
+//     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
+//     <script src="${sourcePath}/app.js"></script>
+//   </body>
+// </html>`
+//   );
 });
 
 server.listen(process.env.PORT || config.port);

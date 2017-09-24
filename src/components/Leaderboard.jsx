@@ -24,14 +24,14 @@ class Leaderboard extends Component {
         </div>
         <div className={styles.players}>
           {this.props.players.entrySeq()
-            .map(([twitch, list]) => ({ twitch, score: list ? list.count(val => val) : 0 }))
-            .sort((a, b) => b.score - a.score)
-            .map(({ twitch, score }, index) => ({ twitch, score, index }))
+            .map(([twitch, stats]) => ({ twitch, acquired: stats.acquired, spent: stats.spent }))
+            .sort((a, b) => b.acquired + b.spent - a.acquired - a.spent)
+            .map(({ twitch, acquired, spent }, index) => ({ twitch, acquired, spent, index }))
             .sort((a, b) => (a.twitch.toLowerCase() < b.twitch.toLowerCase() ? -1 : 1))
-            .map(({ twitch, score, index }) => (
+            .map(({ twitch, acquired, spent, index }) => (
               <div key={twitch} className={styles.entry} style={{ transform: `translateY(${40 * index}px)` }}>
                 <div className={styles.name}>{twitch}</div>
-                <div className={styles.score}>{score}</div>
+                <div className={styles.score}>{acquired + spent}</div>
               </div>
             ))
           }

@@ -7,10 +7,10 @@ const common = require('./webpack.config.client.common');
 
 module.exports = merge(common, {
   entry: {
-    app: [
-      'react-hot-loader/patch',
-      './src/client.jsx',
-    ],
+    // app: [
+    //   'react-hot-loader/patch',
+    //   './src/client.jsx',
+    // ],
     login: [
       'react-hot-loader/patch',
       './src/login.jsx',
@@ -18,6 +18,14 @@ module.exports = merge(common, {
     leaderboard: [
       'react-hot-loader/patch',
       './src/leaderboard.jsx',
+    ],
+    rupeeGoal: [
+      'react-hot-loader/patch',
+      './src/rupeeClient.jsx',
+    ],
+    admin: [
+      'react-hot-loader/patch',
+      './src/admin.jsx',
     ],
   },
   devtool: 'source-map',
@@ -60,7 +68,7 @@ module.exports = merge(common, {
           options: babelConfigClientDev,
         },
       }, {
-        test: /(\.svg$|\.otf$)/,
+        test: /(\.svg$|\.otf$|\.png$)/,
         use: {
           loader: 'file-loader',
         }

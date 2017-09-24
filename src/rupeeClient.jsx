@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import io from 'socket.io-client';
 import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import socketMiddleware from './util/clientSocketMiddleware';
-import reducers, { RupeeRecord } from './reducers/rupeeGoal';
 import { Map, List } from 'immutable';
+import socketMiddleware from './util/clientSocketMiddleware'
+import io from 'socket.io-client';
+import { Provider } from 'react-redux';
 
-import Leaderboard from './components/Leaderboard';
+import App from './components/RupeeGoal';
+import reducers, { RupeeRecord } from './reducers/rupeeGoal';
 
 const socket = io();
 
@@ -22,7 +21,7 @@ const render = () => {
   const registry = {}
   const app = (
     <Provider store={store}>
-      <Leaderboard />
+      <App twitch={window.USER} />
     </Provider>
   );
   ReactDOM.render(app, document.getElementById('react-root'));
@@ -31,5 +30,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept('./components/Login', () => { render() });
+  module.hot.accept('./components/RupeeGoal', () => { render() });
 }
