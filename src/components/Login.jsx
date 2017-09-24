@@ -15,7 +15,7 @@ export default class Login extends Component {
           </div>
         </div>
         <div className={styles.desc}>
-          Season 2<br/>Race 3
+          Season 2<br/>Race 4
         </div>
         <a className={styles['login-button']} href='/auth/twitch'>
           <span>Login with Twitch</span>
