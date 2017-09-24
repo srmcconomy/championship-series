@@ -53,7 +53,7 @@ module.exports = merge(common, {
           options: babelConfigClientProd,
         },
       }, {
-        test: /(\.svg$|\.otf$)/,
+        test: /(\.svg$|\.otf$|\.png$)/,
         use: {
           loader: 'file-loader',
         }
