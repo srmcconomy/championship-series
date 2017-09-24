@@ -20,7 +20,7 @@ module.exports = merge(common, {
     rupeeGoal: [
       './src/rupeeClient.jsx',
     ],
-    rupeeGoal: [
+    admin: [
       './src/admin.jsx',
     ],
   },
