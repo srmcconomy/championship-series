@@ -27,6 +27,7 @@ class RupeeGoal extends Component {
         <div className={styles.desc}>
           Goal: Spend at least 1200 rupees, then talk to the carpenter boss with at least 200 rupees<br/><br/>
           Restriction: You may not pick up any rupees except from chests.  If you accidentally pick up a rupee you must immediately reset your game<br/><br/>
+          Each item can ONLY be bought once, choose carefully which price you buy them at.<br/><br/>
           YOU MAY PICK UP NON-CHEST RUPEES IF YOUR WALLET IS FULL<br/><br/>
         </div>
         <div className={styles.tool}>
