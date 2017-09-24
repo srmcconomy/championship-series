@@ -40,8 +40,9 @@ class RupeeGoal extends Component {
           <div className={styles.acquired}>
             <div className={styles.amount}>
               Amount in wallet: <span>{this.props.acquired}</span>
-            </div>
-            <div className={styles.clear} onClick={this.onAcquireClick()}>
+              <button className={styles.clear} onClick={this.onAcquireClick()}>
+                CLEAR
+              </button>
             </div>
             <div className={styles.controls}>
               <button onClick={this.onAcquireClick(200)} className={styles.gold}>+200</button>
@@ -53,8 +54,10 @@ class RupeeGoal extends Component {
           <div className={styles.spent}>
             <div className={styles.amount}>
               Amount spent: <span>{this.props.spent}</span>/1200
-            </div>
-            <div className={styles.clear} onClick={this.onSpendClick()}>
+
+              <button className={styles.clear} onClick={this.onSpendClick()}>
+                CLEAR
+              </button>
             </div>
             <div className={styles.controls}>
               <button disabled={this.props.acquired < 100} onClick={this.onSpendClick(100)}>+100</button>
