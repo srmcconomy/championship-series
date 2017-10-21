@@ -1,0 +1,183 @@
+body {
+  margin: 0;
+  background: #111111;
+  color: white;
+  font-family: Roboto;
+}
+
+.chestGoal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .inner {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .left {
+    padding: 20px 0 0 20px;
+    width: 200px;
+    .capture-square {
+      display: flex;
+      flex-direction: column;
+      padding: 20px 40px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      height: 342px;
+      width: 67px;
+    }
+    >span {
+      display: inline-block;
+      margin: 10px 0;
+      color: rgba(255, 255, 255, 0.2);
+    }
+  }
+  .right {
+    > div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 114px;
+      height: 114px;
+    }
+    padding: 20px 200px 0 0;
+  }
+
+  .desc {
+    padding: 20px;
+  }
+
+  .dungeon {
+    height: 32px;
+    width: 32px;
+    background-size: cover;
+    &.inactive {
+      opacity: 0.3;
+    }
+  }
+
+  .right-dungeon, .left-dungeon {
+    cursor: pointer;
+  }
+
+  .right-dungeon {
+    margin: 3px;
+  }
+
+  .left-dungeon {
+    display: flex;
+    align-items: center;
+    margin: 3px;
+    span {
+      margin: 1px;
+    }
+  }
+
+  .den {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .deku {
+    background-image: url(./images/deku.png);
+  }
+
+  .dc {
+    background-image: url(./images/dc.png);
+  }
+
+  .jabu {
+    background-image: url(./images/jabu.png);
+  }
+
+  .forest {
+    background-image: url(./images/forest.png);
+  }
+
+  .fire {
+    background-image: url(./images/fire.png);
+  }
+
+  .water {
+    background-image: url(./images/water.png);
+  }
+
+  .shadow {
+    background-image: url(./images/shadow.png);
+  }
+
+  .spirit {
+    background-image: url(./images/spirit.png);
+  }
+
+  .ganon {
+    background-image: url(./images/ganon.png);
+  }
+
+
+
+
+  button {
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    background-color: inherit;
+    height: 64px;
+    width: 64px;
+    background-size: contain;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background-color: #222222;
+    border-radius: 2px;
+    margin: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+    &:disabled {
+      color: #444444;
+    }
+
+    &.selected {
+      background-color: #1B5E20;
+    }
+
+    &.clear {
+      height: inherit;
+      width: inherit;
+      padding: 4px 8px;
+      font-size: 12px;
+      margin: 0 16px;
+    }
+
+  }
+  .acquired {
+    margin: 30px 0;
+  }
+
+  .spent, .acquired {
+    .amount span {
+      display: inline-block;
+      width: 60px;
+      text-align: right;
+      font-size: 24px;
+    }
+  }
+  .red {
+    background-image: url('./images/red.png');
+  }
+  .blue {
+    background-image: url('./images/blue.png');
+  }
+  .purple {
+    background-image: url('./images/purple.png');
+  }
+  .gold {
+    background-image: url('./images/gold.png');
+  }
+  .adultWallet {
+    background-image: url('./images/adult.png');
+  }
+  .giantsWallet {
+    background-image: url('./images/giant.png');
+  }
+}
