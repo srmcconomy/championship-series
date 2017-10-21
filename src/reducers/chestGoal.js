@@ -14,6 +14,8 @@ export default function (state = new Map(), action) {
       return state.update(action.twitch, list => list.take(action.index));
     case 'remove-player':
       return state.delete(action.twitch);
+    case 'set-state':
+      return action.newState;
     default:
       return state;
   }

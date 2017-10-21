@@ -10,13 +10,15 @@ import { Map, List } from 'immutable';
 
 import Leaderboard from './components/Leaderboard';
 
-const socket = io();
-
-const initialState = new Map(
-  Object.keys(window.INITIAL_STATE).map(key => [key, new List(window.INITIAL_STATE[key])]),
+const stateFromJS = (json) => new Map(
+  Object.keys(json).map(key => [key, new List(json[key])])
 );
 
-const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket)));
+const socket = io();
+
+const initialState = stateFromJS(window.INITIAL_STATE);
+
+const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket, stateFromJS)));
 
 const render = () => {
   const registry = {}

@@ -9,13 +9,16 @@ import { Provider } from 'react-redux';
 import App from './components/ChestGoal';
 import reducers from './reducers/chestGoal';
 
-const socket = io();
-
-const initialState = new Map(
-  Object.keys(window.INITIAL_STATE).map(key => [key, new List(window.INITIAL_STATE[key])]),
+const stateFromJS = (json) => new Map(
+  Object.keys(json).map(key => [key, new List(json[key])])
 );
 
-const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket)));
+const socket = io();
+let dirty = false;
+
+const initialState = stateFromJS(window.INITIAL_STATE);
+
+const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket, stateFromJS)));
 
 const render = () => {
   const registry = {}

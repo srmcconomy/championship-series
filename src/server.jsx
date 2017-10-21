@@ -11,6 +11,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers/chestGoal';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
+import 'source-map-support/register'
 
 const app = express();
 const server = http.Server(app);
@@ -22,6 +23,10 @@ app.use(cookieParser());
 app.use(cookieSession({ secret:'verysecretetc1234' }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+function isAdmin(user) {
+  return ['prettybigjoe', 'tdavpat', 'whatthehellshappened', 'senn__'].includes(user.username);
+}
 
 const playersOnStream = [];
 
@@ -49,13 +54,11 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-
-
 app.get('/auth/twitch', passport.authenticate('twitch'));
 app.get('/auth/twitch/callback',
 passport.authenticate('twitch', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/rupee-goal');
+    res.redirect('/chest-goal');
   },
 );
 
@@ -94,7 +97,8 @@ app.get('/leaderboard', (req, res) => {
   );
 });
 
-app.get('/ewqfdsvsfdsg', (req, res) => {
+app.get('/admin', (req, res) => {
+  if (!isAdmin(req.user)) res.send('404');
   res.send(
 `<html>
   <head>
@@ -126,6 +130,11 @@ app.post('/stream', (req, res) => {
 
 app.get('/chest-goal', (req, res) => {
   if (!req.user) res.redirect('/login');
+  let username = req.user.username;
+  if (isAdmin(req.user) && req.query.player) {
+    username = req.query.player;
+  }
+  console.log(store.getState())
   res.send(
 `<html>
   <head>
@@ -134,7 +143,7 @@ app.get('/chest-goal', (req, res) => {
   </head>
   <body>
     <div id="react-root"></div>
-    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
+    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${username}'</script>
     <script src="${sourcePath}/chestGoal.js"></script>
   </body>
 </html>`
