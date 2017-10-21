@@ -11,13 +11,15 @@ body {
   margin: 20px;
 }
 
+
+
 .places {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
   .place {
     margin: 4px 0;
-    height: 32px;
+    height: 64px;
     display: flex;
     align-items: center;
     color: rgb(128, 128, 128);
@@ -40,17 +42,21 @@ body {
 .entry {
   transition: transform 0.3s ease-in-out;
   position: absolute;
-  height: 32px;
+  height: 64px;
   border-radius: 16px;
   background: #303030;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   display: flex;
-  align-items: center;
-  width: 250px;
-  padding: 0 0 0 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 256px;
+  padding: 0 8px 0 8px;
   margin: 4px 0;
   .name {
     flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
   }
   .score {
     background: #424242;
@@ -60,4 +66,66 @@ body {
     display: flex;
     align-items: center;
   }
+}
+
+.list {
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  bottom: 2px;
+  right: 8px;
+  &.done {
+    color: #4CAF50;
+  }
+  text-shadow: -1px 1px black;
+}
+
+.dungeons {
+  display: flex;
+}
+
+.dungeon {
+  height: 32px;
+  width: 32px;
+  background-size: cover;
+}
+
+
+
+.deku {
+  background-image: url(./images/deku.png);
+}
+
+.dc {
+  background-image: url(./images/dc.png);
+}
+
+.jabu {
+  background-image: url(./images/jabu.png);
+}
+
+.forest {
+  background-image: url(./images/forest.png);
+}
+
+.fire {
+  background-image: url(./images/fire.png);
+}
+
+.water {
+  background-image: url(./images/water.png);
+}
+
+.shadow {
+  background-image: url(./images/shadow.png);
+}
+
+.spirit {
+  background-image: url(./images/spirit.png);
+}
+
+.ganon {
+  background-image: url(./images/ganon.png);
 }

@@ -23,6 +23,10 @@ module.exports = merge(common, {
       'react-hot-loader/patch',
       './src/rupeeClient.jsx',
     ],
+    chestGoal: [
+      'react-hot-loader/patch',
+      './src/chestClient.jsx',
+    ],
     admin: [
       'react-hot-loader/patch',
       './src/admin.jsx',

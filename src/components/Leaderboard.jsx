@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './leaderboard.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 console.log(styles);
 
@@ -24,14 +27,23 @@ class Leaderboard extends Component {
         </div>
         <div className={styles.players}>
           {this.props.players.entrySeq()
-            .map(([twitch, stats]) => ({ twitch, acquired: stats.acquired, spent: stats.spent }))
-            .sort((a, b) => b.acquired + b.spent - a.acquired - a.spent)
-            .map(({ twitch, acquired, spent }, index) => ({ twitch, acquired, spent, index }))
-            .sort((a, b) => (a.twitch.toLowerCase() < b.twitch.toLowerCase() ? -1 : 1))
-            .map(({ twitch, acquired, spent, index }) => (
-              <div key={twitch} className={styles.entry} style={{ transform: `translateY(${40 * index}px)` }}>
+            .map(([twitch, list]) => ({ twitch, list }))
+            .sort((a, b) => {
+              const diff = b.list.count((data, index) => data.chests > index) - a.list.count((data, index) => data.chests > index);
+              if (diff === 0) return a.twitch > b.twitch ? -1 : 1;
+              return diff;
+            })
+            .map(({ twitch, list }, index) => (
+              <div key={twitch} className={styles.entry} style={{ transform: `translateY(${72 * index}px)` }}>
                 <div className={styles.name}>{twitch}</div>
-                <div className={styles.score}>{acquired + spent}</div>
+                <div className={styles.dungeons}>
+                  {list.map((data, index) => (
+                    <div className={styles.list}>
+                      <div className={cx('dungeon', data.dungeon)}/>
+                      <div className={cx('count', { done: data.chests > index })}>{data.chests}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))
           }

@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import socketMiddleware from './util/clientSocketMiddleware';
-import reducers, { RupeeRecord } from './reducers/rupeeGoal';
+import reducers from './reducers/chestGoal';
 import { Map, List } from 'immutable';
 
 import Leaderboard from './components/Leaderboard';
@@ -13,7 +13,7 @@ import Leaderboard from './components/Leaderboard';
 const socket = io();
 
 const initialState = new Map(
-  Object.keys(window.INITIAL_STATE).map(key => [key, new RupeeRecord(window.INITIAL_STATE[key])]),
+  Object.keys(window.INITIAL_STATE).map(key => [key, new List(window.INITIAL_STATE[key])]),
 );
 
 const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket)));
@@ -31,5 +31,5 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept('./components/Login', () => { render() });
+  module.hot.accept('./components/Leaderboard', () => { render() });
 }

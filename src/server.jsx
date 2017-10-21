@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers/rupeeGoal';
+import reducers from './reducers/chestGoal';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
 
@@ -124,22 +124,39 @@ app.post('/stream', (req, res) => {
   }
 });
 
-app.get('/rupee-goal', (req, res) => {
+app.get('/chest-goal', (req, res) => {
   if (!req.user) res.redirect('/login');
   res.send(
 `<html>
   <head>
-    <link href="${sourcePath}/rupeeGoal.css" rel="stylesheet">
+    <link href="${sourcePath}/chestGoal.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
   </head>
   <body>
     <div id="react-root"></div>
     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
-    <script src="${sourcePath}/rupeeGoal.js"></script>
+    <script src="${sourcePath}/chestGoal.js"></script>
   </body>
 </html>`
   );
 });
+
+// app.get('/rupee-goal', (req, res) => {
+//   if (!req.user) res.redirect('/login');
+//   res.send(
+// `<html>
+//   <head>
+//     <link href="${sourcePath}/rupeeGoal.css" rel="stylesheet">
+//     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+//   </head>
+//   <body>
+//     <div id="react-root"></div>
+//     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${req.user.username}'</script>
+//     <script src="${sourcePath}/rupeeGoal.js"></script>
+//   </body>
+// </html>`
+//   );
+// });
 
 app.use((req, res) => {
   if (!req.user) res.redirect('/login');
