@@ -38,7 +38,7 @@ class Leaderboard extends Component {
       async () => {
         const req = await fetch('http://api.speedrunslive.com/races');
         const { races } = await req.json();
-        const race = races.find(r => Object.keys(r.entrants).some(name => name.toLowerCase() === 'tgh'));
+        const race = races.find(r => Object.keys(r.entrants).some(name => name.toLowerCase() === 'exodus'));
         const times = new Map(Object.values(race.entrants).filter(({ time }) => time > 0).map(({ twitch, time }) => [ twitch.toLowerCase(), time ]))
         this.setState({ times });
       },
