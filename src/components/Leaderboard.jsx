@@ -39,6 +39,7 @@ class Leaderboard extends Component {
         const req = await fetch('http://api.speedrunslive.com/races');
         const { races } = await req.json();
         const race = races.find(r => Object.keys(r.entrants).some(name => name.toLowerCase() === 'exodus'));
+        if (!race) return;
         const times = new Map(Object.values(race.entrants).filter(({ time }) => time > 0).map(({ twitch, time }) => [ twitch.toLowerCase(), time ]))
         this.setState({ times });
       },
@@ -52,10 +53,11 @@ class Leaderboard extends Component {
 
   render() {
     const players = this.props.players.entrySeq()
-      .map(([twitch, list]) => ({
+      .map(([twitch, { full, piece }]) => ({
         twitch,
-        list,
-        score: (list.count((data, index) => data.chests > index) * 10) + list.reduce((r, { chests }, index) => r + Math.min(chests, index + 1), 0),
+        full,
+        piece,
+        score: full * 4 + piece,
         time: this.state.times.has(twitch.toLowerCase()) ? this.state.times.get(twitch.toLowerCase()) : null,
       }))
       .sort((a, b) => {
@@ -66,9 +68,10 @@ class Leaderboard extends Component {
         if (diff === 0) return a.twitch > b.twitch ? -1 : 1;
         return diff;
       })
-      .map(({ twitch, list, score, time}, index, seq) => ({
+      .map(({ twitch, full, piece, score, time}, index, seq) => ({
         twitch,
-        list,
+        full,
+        piece,
         score,
         time,
         hidePlace: index > 0 && (time ? seq.get(index - 1).time === time : seq.get(index - 1).score === score)
@@ -83,19 +86,15 @@ class Leaderboard extends Component {
         </div>
         <div className={styles.players}>
           {
-            players.map(({ twitch, list, time }, index) => (
+            players.map(({ twitch, full, piece, time }, index) => (
               <div key={twitch} className={styles.entry} style={{ transform: `translateY(${72 * index}px)` }}>
                 <div className={styles.toprow}>
                   <div className={styles.name}>{twitch}</div>
                   <div className={styles.time}>{time && timeText(time)}</div>
                 </div>
-                <div className={styles.dungeons}>
-                  {list.map((data, index) => (
-                    <div key={index} className={styles.list}>
-                      <div className={cx('dungeon', data.dungeon)}/>
-                      <div className={cx('count', { done: data.chests > index })}>{data.chests}</div>
-                    </div>
-                  ))}
+                <div className={styles.hearts}>
+                  {[...Array(full + 3)].map(() => <div className={styles.heart} />)}
+                  {piece ? <div className={styles[`piece-${piece}`]} /> : null}
                 </div>
               </div>
             ))

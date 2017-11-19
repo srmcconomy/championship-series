@@ -27,6 +27,10 @@ module.exports = merge(common, {
       'react-hot-loader/patch',
       './src/chestClient.jsx',
     ],
+    heartGoal: [
+      'react-hot-loader/patch',
+      './src/heartClient.jsx',
+    ],
     admin: [
       'react-hot-loader/patch',
       './src/admin.jsx',

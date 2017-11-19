@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers/chestGoal';
+import reducers from './reducers/heartGoal';
 import socketMiddleware from './util/serverSocketMiddleware';
 import socketio from 'socket.io';
 import 'source-map-support/register'
@@ -58,7 +58,7 @@ app.get('/auth/twitch', passport.authenticate('twitch'));
 app.get('/auth/twitch/callback',
 passport.authenticate('twitch', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/chest-goal');
+    res.redirect('/heart-goal');
   },
 );
 
@@ -145,6 +145,28 @@ app.get('/chest-goal', (req, res) => {
     <div id="react-root"></div>
     <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${username}'</script>
     <script src="${sourcePath}/chestGoal.js"></script>
+  </body>
+</html>`
+  );
+});
+
+app.get('/heart-goal', (req, res) => {
+  if (!req.user) res.redirect('/login');
+  let username = req.user.username;
+  if (isAdmin(req.user) && req.query.player) {
+    username = req.query.player;
+  }
+  console.log(store.getState())
+  res.send(
+`<html>
+  <head>
+    <link href="${sourcePath}/heartGoal.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  </head>
+  <body>
+    <div id="react-root"></div>
+    <script>window.INITIAL_STATE=${JSON.stringify(store.getState().toJS())};window.USER='${username}'</script>
+    <script src="${sourcePath}/heartGoal.js"></script>
   </body>
 </html>`
   );

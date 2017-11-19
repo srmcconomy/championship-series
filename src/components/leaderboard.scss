@@ -6,6 +6,36 @@ body {
   height: 10000px;
 }
 
+.heart, .piece-1, .piece-2, .piece-3 {
+  height: 17px;
+  width: 19px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hearts {
+  display: flex;
+  flex-wrap: wrap;
+  width: 190px;
+  height: 34px;
+}
+
+.heart {
+  background-image: url(./images/heart.png);
+}
+
+.piece-1 {
+  background-image: url(./images/piece-1.png);
+}
+
+.piece-2 {
+  background-image: url(./images/piece-2.png);
+}
+
+.piece-3 {
+  background-image: url(./images/piece-3.png);
+}
+
 .leaderboard {
   display: flex;
   margin: 20px;
@@ -56,7 +86,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   width: 288px;
-  padding: 0 8px 0 8px;
+  padding: 0 8px 4px 8px;
   margin: 4px 0;
   .name, .time {
     display: flex;

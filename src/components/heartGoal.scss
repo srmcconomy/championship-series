@@ -1,0 +1,78 @@
+.heart, .piece-1, .piece-2, .piece-3 {
+  height: 17px;
+  width: 19px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.heart {
+  background-image: url(./images/heart.png);
+}
+
+.piece-1 {
+  background-image: url(./images/piece-1.png);
+}
+
+.piece-2 {
+  background-image: url(./images/piece-2.png);
+}
+
+.piece-3 {
+  background-image: url(./images/piece-3.png);
+}
+
+.heartGoal {
+  margin: 20px;
+  display: flex;
+}
+
+.heartsContainer {
+  margin-bottom: 100px;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+
+.fixed {
+  display: inline-block;
+  width: 300px;
+}
+
+
+
+
+.hearts {
+  display: flex;
+  flex-wrap: wrap;
+  width: 190px;
+  height: 34px;
+}
+
+body {
+  margin: 0;
+  background: #333333;
+  color: white;
+  font-family: Roboto;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px;
+  border: 0;
+  outline: none;
+  background-color: inherit;
+  background-size: contain;
+  font-size: 18px;
+  display: block;
+  width: 200px;
+  font-weight: 600;
+  color: white;
+  background-color: #444;
+  border-radius: 2px;
+  margin: 5px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
