@@ -5,18 +5,27 @@ import io from 'socket.io-client';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import socketMiddleware from './util/clientSocketMiddleware';
-import reducers, { RupeeRecord } from './reducers/rupeeGoal';
+import reducers from './reducers/enemyGoal';
 import { Map, List } from 'immutable';
 
 import Admin from './components/Admin';
 
 const socket = io();
 
-const initialState = new Map(
-  Object.keys(window.INITIAL_STATE).map(key => [key, new RupeeRecord(window.INITIAL_STATE[key])]),
+const stateFromJS = json => new Map(
+  Object.keys(json).map(key => {
+    const rec = {}
+    Object.keys(json[key]).forEach(dungeon => {
+      rec[dungeon] = new Map(Object.keys(json[key][dungeon]).map(enemy => [enemy, json[key][dungeon][enemy]]))
+    });
+
+    return [key, new EnemyRecord(rec)];
+  })
 );
 
-const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket)));
+const initialState = stateFromJS(window.INITIAL_STATE);
+
+const store = createStore(reducers, initialState, applyMiddleware(socketMiddleware(socket, stateFromJS)));
 
 const render = () => {
   const registry = {}

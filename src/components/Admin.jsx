@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { removePlayer } from '../actions/rupeeGoal';
+import { removePlayer } from '../actions/enemyGoal';
 
 class Admin extends Component {
   onRemoveClick = twitch => () => {
@@ -11,12 +11,9 @@ class Admin extends Component {
   render() {
     return (
       <div style={{ margin: 20 }}>
-        {this.props.players.entrySeq().map(([twitch, { acquired, spent, wallet }]) => (
-          <div key={twitch}>
+        {this.props.players.entrySeq().map(([twitch, data]) => (
+          <div key={twitch} style={{ margin: '20px' }}>
             <div>{twitch}</div>
-            <div>in wallet: {acquired}</div>
-            <div>spent: {spent}</div>
-            <div>wallet size: {wallet}</div>
             <button onClick={this.onRemoveClick(twitch)}>REMOVE</button>
           </div>
         ))}
