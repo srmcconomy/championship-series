@@ -121,10 +121,18 @@ class EnemyGoal extends Component {
         </div>
         <div className={styles.right}>
           <div className={styles.desc}>
-            <div>Goal: Beat Shadow, Beat Spirit, Get Bow, enter Light Arrows CS</div>
+            <div>Goal: Beat Shadow, beat Spirit, get Bow, enter Light Arrow CS</div>
             <div>Defeat all of the listed enemies in the proper dungeons</div>
             <div>Enemies listed more than once must be defeated once per dungeon that they are listed in</div>
-            <div>No IM/WW</div>
+            <div>Item Manipulation (RBA, BA, GIM) and Wrong Warp are banned</div>
+            <div>Timing ends once you've entered the Light Arrow Cutscene with Bow in your inventory</div>
+            <br />
+            <div>Enemy Clarification:</div>
+            <div>Business Scrubs count as defeated when they want to sell something to you</div>
+            <div>Keese can be defeated in any state (fire, ice, normal) and count as the same</div>
+            <div>Floormasters (the ones which split) and Wallmasters (hanging from ceiling) will be treated as different enemies</div>
+            <div>You only need to kill one Poe Sister in Forest Temple, you can kill more if needed for progression</div>
+            <div>You do not need to collect the Gold Skulltula Token</div>
           </div>
 
         </div>
