@@ -37,6 +37,7 @@ module.exports = merge(common, {
     chunkFilename: '[name].chunk.js',
     filename: '[name].js',
     path: config.clientOutputPath,
+    publicPath: '/dist/',
   },
   plugins: [
     new ExtractTextPlugin({
