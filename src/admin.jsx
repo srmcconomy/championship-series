@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import socketMiddleware from './util/clientSocketMiddleware';
-import reducers from './reducers/enemyGoal';
+import reducers, { EnemyRecord } from './reducers/enemyGoal';
 import { Map, List } from 'immutable';
 
 import Admin from './components/Admin';
