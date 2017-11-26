@@ -38,7 +38,7 @@ class Leaderboard extends Component {
       async () => {
         const req = await fetch('http://api.speedrunslive.com/races');
         const { races } = await req.json();
-        const race = races.find(r => Object.keys(r.entrants).some(name => name.toLowerCase() === 'exodus'));
+        const race = races.find(r => Object.keys(r.entrants).some(name => name.toLowerCase() === 'jkoper'));
         if (!race) return;
         const times = new Map(Object.values(race.entrants).filter(({ time }) => time > 0).map(({ twitch, time }) => [ twitch.toLowerCase(), time ]))
         this.setState({ times });
@@ -53,13 +53,18 @@ class Leaderboard extends Component {
 
   render() {
     const players = this.props.players.entrySeq()
-      .map(([twitch, { full, piece }]) => ({
-        twitch,
-        full,
-        piece,
-        score: full * 4 + piece,
-        time: this.state.times.has(twitch.toLowerCase()) ? this.state.times.get(twitch.toLowerCase()) : null,
-      }))
+      .map(([twitch, data]) => {
+        const dungeons = {};
+        Object.keys(data.toJS()).forEach(key => dungeons[key] = data[key].count(val => val));
+        let score = 0;
+        Object.keys(dungeons).forEach(key => score += dungeons[key]);
+        return {
+          twitch,
+          dungeons,
+          score,
+          time: this.state.times.has(twitch.toLowerCase()) ? this.state.times.get(twitch.toLowerCase()) : null,
+        };
+      })
       .sort((a, b) => {
         if (a.time && b.time) return a.time - b.time;
         if (a.time) return -1;
@@ -68,10 +73,9 @@ class Leaderboard extends Component {
         if (diff === 0) return a.twitch > b.twitch ? -1 : 1;
         return diff;
       })
-      .map(({ twitch, full, piece, score, time}, index, seq) => ({
+      .map(({ twitch, dungeons, score, time}, index, seq) => ({
         twitch,
-        full,
-        piece,
+        dungeons,
         score,
         time,
         hidePlace: index > 0 && (time ? seq.get(index - 1).time === time : seq.get(index - 1).score === score)
@@ -86,16 +90,10 @@ class Leaderboard extends Component {
         </div>
         <div className={styles.players}>
           {
-            players.map(({ twitch, full, piece, time }, index) => (
-              <div key={twitch} className={styles.entry} style={{ transform: `translateY(${72 * index}px)` }}>
-                <div className={styles.toprow}>
-                  <div className={styles.name}>{twitch}</div>
-                  <div className={styles.time}>{time && timeText(time)}</div>
-                </div>
-                <div className={styles.hearts}>
-                  {[...Array(full + 3)].map(() => <div className={styles.heart} />)}
-                  {piece ? <div className={styles[`piece-${piece}`]} /> : null}
-                </div>
+            players.map(({ twitch, dungeons, score, time }, index) => (
+              <div key={twitch} className={styles.entry} style={{ transform: `translateY(${40 * index}px)` }}>
+                <div className={styles.name}>{twitch}</div>
+                {time ? <div className={styles.time}>{time && timeText(time)}</div> : <div className={styles.score}>{score}</div>}
               </div>
             ))
           }

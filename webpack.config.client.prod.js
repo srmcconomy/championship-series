@@ -26,6 +26,9 @@ module.exports = merge(common, {
     heartGoal: [
       './src/heartClient.jsx',
     ],
+    enemyGoal: [
+      './src/enemyClient.jsx',
+    ],
     admin: [
       './src/admin.jsx',
     ],
